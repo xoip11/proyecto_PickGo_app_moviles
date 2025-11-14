@@ -6,4 +6,9 @@ public partial class RegistroPage : ContentPage
 	{
 		InitializeComponent();
 	}
+	private async void Registrar_Cliked(object sender, EventArgs e)
+	{
+		await DisplayAlert("Registro", "Usuario registrado", "OK");
+		await Navigation.PopAsync();
+	}
 }

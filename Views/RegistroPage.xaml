@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.RegistroPage"
              Title="RegistroPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label Text="Crea Cuenta" FontSize="28" FontAttributes="Bold"
+          HorizontalOptions="Center" />
+
+        <Entry x:Name="txtNombre" Placeholder="Nombre Completo"/>
+        <Entry x:Name="txtTelefono" Placeholder="Numero de telefono" Keyboard="Telephone"/>
+        <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True"/>
+        <Button Text="Registrar" Clicked="Registrar_Cliked"/>
     </VerticalStackLayout>
 </ContentPage>

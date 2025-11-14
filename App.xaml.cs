@@ -1,4 +1,6 @@
-﻿namespace PickGo
+﻿using PickGo.Views;
+
+namespace PickGo
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new Views.InicioPage());
         }
     }
 }
