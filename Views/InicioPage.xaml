@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PickGo.Views.InicioPage"
+             Title="InicioPage">
+    <VerticalStackLayout>
+        <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             x:Class="CatalogoTiendasApp.Views.InicioPage"
+             Title="Inicio">
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <Label Text="Iniciar Sesión" FontSize="24" HorizontalOptions="Center" />
+
+                <Entry x:Name="txtTelefono" Placeholder="Número de teléfono" Keyboard="Telephone" />
+                <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True" />
+
+                <Button Text="Continuar" Clicked="Continuar_Clicked" />
+                <Button Text="Registrarse" Clicked="Registrarse_Clicked" />
+
+            </VerticalStackLayout>
+        </ContentPage>
+
+    </VerticalStackLayout>
+</ContentPage>
