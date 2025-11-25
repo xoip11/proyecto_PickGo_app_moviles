@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.CarritoPage"
              Title="CarritoPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label Text="Tu carrito" FontSize="28" HorizontalOptions="Center" />
+
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nombre}" Detail="Producto agregado" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Recoger" />
+            <Button Text="Enviar" />
+            <Button Text="Pagar" BackgroundColor="Green" TextColor="White" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

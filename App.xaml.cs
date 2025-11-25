@@ -10,5 +10,6 @@ namespace PickGo
 
             MainPage = new NavigationPage(new Views.InicioPage());
         }
+       
     }
 }
