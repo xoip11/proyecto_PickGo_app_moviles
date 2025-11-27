@@ -4,9 +4,25 @@
              x:Class="PickGo.Views.CatalogoPage"
              Title="CatalogoPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <CollectionView x:Name="ListaTiendas" ItemsSource="{Binding Tiendas}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" Margin="10" Padding="10" CornerRadius="10">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nombre}" FontSize="20" />
+                            <HorizontalStackLayout Spacing="10">
+                                <Button Text=" Favorito" />
+                                <Button Text=" Agregar" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Padding="10" Spacing="15" HorizontalOptions="Center">
+            <Button Text=" Carrito" Clicked="IrCarrito_Clicked" />
+            <Button Text=" Perfil" Clicked="IrPerfil_Clicked" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
