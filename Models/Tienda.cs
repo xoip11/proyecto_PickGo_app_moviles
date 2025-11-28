@@ -9,5 +9,13 @@ namespace PickGo.Models
     public class Tienda
     {
             public string Nombre { get; set; }
+
+
+
     }
+
+
+    
 }
+
+

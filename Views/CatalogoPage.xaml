@@ -3,26 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.CatalogoPage"
              Title="CatalogoPage">
-    <VerticalStackLayout>
-        <CollectionView x:Name="ListaTiendas" ItemsSource="{Binding Tiendas}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="LightGray" Margin="10" Padding="10" CornerRadius="10">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Nombre}" FontSize="20" />
-                            <HorizontalStackLayout Spacing="10">
-                                <Button Text=" Favorito" />
-                                <Button Text=" Agregar" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+    <Grid>
 
-        <HorizontalStackLayout Padding="10" Spacing="15" HorizontalOptions="Center">
-            <Button Text=" Carrito" Clicked="IrCarrito_Clicked" />
-            <Button Text=" Perfil" Clicked="IrPerfil_Clicked" />
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gainsboro" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout Padding="10">
+           
+                <CollectionView x:Name="ListaTiendas" ItemsSource="{Binding Tiendas}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="LightGray" Margin="10" Padding="10" CornerRadius="10">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Nombre}" FontSize="20" />
+                                    <HorizontalStackLayout Spacing="10">
+                                    <Button Text=" Favorito"  BackgroundColor="OrangeRed" />
+
+                                    <Button Text=" Agregar" BackgroundColor="ForestGreen"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <HorizontalStackLayout Padding="10" Spacing="15" HorizontalOptions="Center">
+                <Button Text=" Carrito" Clicked="IrCarrito_Clicked" BackgroundColor= "Gray" />
+                    <Button Text=" Perfil" Clicked="IrPerfil_Clicked" BackgroundColor= "Gray" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+
+    </Grid>
 </ContentPage>

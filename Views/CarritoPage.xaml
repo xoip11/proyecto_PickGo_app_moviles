@@ -3,21 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.CarritoPage"
              Title="CarritoPage">
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Tu carrito" FontSize="28" HorizontalOptions="Center" />
+    <Grid>
 
-        <ListView>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Nombre}" Detail="Producto agregado" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gainsboro" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <HorizontalStackLayout Spacing="10">
-            <Button Text="Recoger" />
-            <Button Text="Enviar" />
-            <Button Text="Pagar" BackgroundColor="Green" TextColor="White" />
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="Tu carrito" FontSize="28" HorizontalOptions="Center" />
+
+            <ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Nombre}" Detail="Producto agregado" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Recoger" Background="Gray" />
+                <Button Text="Enviar" Background="Gray" />
+                <Button Text="Pagar" BackgroundColor="Green" TextColor="White" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+
+
+    </Grid>
 </ContentPage>

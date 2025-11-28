@@ -3,14 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.PerfilPage"
              Title="PerfilPage">
-    <VerticalStackLayout Padding="30" Spacing="20" >
-        <Label Text="Editar Perfil" FontSize="28" HorizontalOptions="Center"/>
-        <Entry Placeholder="Nombre" x:Name="txtNombre"/>
-        <Entry Placeholder="Numero de telefono" x:Name="txtTelefono" Keyboard="Telephone"/>
-        <Entry Placeholder="Contraseña" x:Name="txtPassword" IsPassword="True"/>
 
+    <Grid>
 
-        <Button Text="Guardar Cambios" Clicked="Guardar_Cliked"/>
+        
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gainsboro" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-    </VerticalStackLayout>
+       
+        <Frame Margin="20"
+               Padding="25"
+               BackgroundColor="White"
+               CornerRadius="30"
+               HasShadow="True">
+
+            <VerticalStackLayout Spacing="15">
+
+                <Label Text="Editar Perfil"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#333" />
+
+                <Label Text="Actualiza tus datos"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="#666" />
+
+              
+                <BoxView HeightRequest="1" Color="#ddd" />
+
+               
+                <Entry x:Name="txtNombre"
+                       Placeholder="Nombre"
+                       BackgroundColor="#F0F0F0"
+                       TextColor="Black"
+                       HeightRequest="50"/>
+
+                <Entry x:Name="txtTelefono"
+                       Placeholder="Número de teléfono"
+                       Keyboard="Telephone"
+                       BackgroundColor="#F0F0F0"
+                       TextColor="Black"
+                       HeightRequest="50"/>
+
+                <Entry x:Name="txtPassword"
+                       Placeholder="Contraseña"
+                       IsPassword="True"
+                       BackgroundColor="#F0F0F0"
+                       TextColor="Black"
+                       HeightRequest="50"/>
+
+            
+                <Button Text="Guardar Cambios"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Clicked="Guardar_Cliked"/>
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+    </Grid>
+
 </ContentPage>
+
