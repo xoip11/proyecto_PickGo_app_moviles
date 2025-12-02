@@ -7,7 +7,7 @@
 
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gray" Offset="0.0"/>
                 <GradientStop Color="Gainsboro" Offset="1.0"/>
             </LinearGradientBrush>
         </Grid.Background>
@@ -19,11 +19,11 @@
                         <DataTemplate>
                             <Frame BorderColor="LightGray" Margin="10" Padding="10" CornerRadius="10">
                                 <VerticalStackLayout>
-                                    <Label Text="{Binding Nombre}" FontSize="20" />
+                                    <Label Text="{Binding Nombre}" FontSize="22" />
                                     <HorizontalStackLayout Spacing="10">
-                                    <Button Text=" Favorito"  BackgroundColor="OrangeRed" />
+                                    <Button Text=" Favorito"  BackgroundColor="Red" Padding="20,0" TextTransform="Uppercase" />
 
-                                    <Button Text=" Agregar" BackgroundColor="ForestGreen"/>
+                                    <Button Text=" Agregar" BackgroundColor="ForestGreen" Padding="20,0" TextTransform="Uppercase"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
                             </Frame>
@@ -32,8 +32,8 @@
                 </CollectionView>
 
                 <HorizontalStackLayout Padding="10" Spacing="15" HorizontalOptions="Center">
-                <Button Text=" Carrito" Clicked="IrCarrito_Clicked" BackgroundColor= "Gray" />
-                    <Button Text=" Perfil" Clicked="IrPerfil_Clicked" BackgroundColor= "Gray" />
+                <Button Text=" Carrito" Clicked="IrCarrito_Clicked" BackgroundColor= "Gray" Padding="25,15" TextColor="Black" TextTransform="Uppercase"/>
+                <Button Text=" Perfil " Clicked="IrPerfil_Clicked" BackgroundColor= "Gray" Padding="26,20" TextColor="Black" TextTransform="Uppercase" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 

@@ -9,7 +9,7 @@
         
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gray" Offset="0.0"/>
                 <GradientStop Color="Gainsboro" Offset="1.0"/>
             </LinearGradientBrush>
         </Grid.Background>
@@ -21,16 +21,17 @@
                CornerRadius="30"
                HasShadow="True">
 
-            <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout Spacing="45">
 
                 <Label Text="Editar Perfil"
-                       FontSize="28"
+                       FontSize="35"
                        FontAttributes="Bold"
+                       TextTransform="Uppercase"
                        HorizontalOptions="Center"
                        TextColor="#333" />
 
                 <Label Text="Actualiza tus datos"
-                       FontSize="16"
+                       FontSize="25"
                        HorizontalOptions="Center"
                        TextColor="#666" />
 
@@ -62,10 +63,12 @@
                 <Button Text="Guardar Cambios"
                         BackgroundColor="Green"
                         TextColor="White"
+                        TextTransform="Uppercase"
                         CornerRadius="10"
                         HeightRequest="50"
                         Clicked="Guardar_Cliked"/>
-
+                
+                <BoxView HeightRequest="1" Color="#ddd" />
             </VerticalStackLayout>
 
         </Frame>

@@ -16,6 +16,7 @@ public partial class PerfilPage : ContentPage
 
         }
 		await DisplayAlert("Perfil", "Cambios guardados correctamente", "OK");
+		 
 
 	}
 }

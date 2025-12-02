@@ -7,30 +7,49 @@
 
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gray" Offset="0.0"/>
                 <GradientStop Color="Gainsboro" Offset="1.0"/>
             </LinearGradientBrush>
         </Grid.Background>
 
-        <VerticalStackLayout Padding="20" Spacing="20">
-            <Label Text="Tu carrito" FontSize="28" HorizontalOptions="Center" />
+       
+        <ScrollView>
+            <VerticalStackLayout
+               Padding="30,0"
+               Spacing="25">
 
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Nombre}" Detail="Producto agregado" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <Label Text="Carrito de compras"
+           FontSize="28"
+           HorizontalOptions="Center"/>
 
-            <HorizontalStackLayout Spacing="10">
-                <Button Text="Recoger" Background="Gray" />
-                <Button Text="Enviar" Background="Gray" />
-                <Button Text="Pagar" BackgroundColor="Green" TextColor="White" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
+                <CollectionView x:Name="ListaCarrito"
+                   ItemsSource="{Binding Carrito}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding Display}" VerticalOptions="Center" />
+                                 
+                                  
+                                <Button Text="Eliminar"
+                               BackgroundColor="Red"
+                                 TextTransform="Uppercase"
+                              TextColor="White"
+                               BindingContext="{Binding}"
+                               Clicked="RemoveProduct_Clicked"/>
+                                
+                               
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
 
+                <Button Text="Agregar producto"
+                 Margin="0,20,0,0"
+                 Clicked="AddProduct_Clicked"/>
+             </VerticalStackLayout>
+        </ScrollView>
 
     </Grid>
-</ContentPage>
+
+</ContentPage> 

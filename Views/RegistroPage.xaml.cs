@@ -18,5 +18,8 @@ public partial class RegistroPage : ContentPage
         await DisplayAlert("Registro", "Usuario registrado", "OK");
 		await Navigation.PopAsync();
     }
-	 
+     
+    
+    
 }
+

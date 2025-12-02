@@ -8,7 +8,7 @@
        
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gray" Offset="0.0"/>
                 <GradientStop Color="Gainsboro" Offset="1.0"/>
             </LinearGradientBrush>
         </Grid.Background>
@@ -20,16 +20,18 @@
                CornerRadius="30"
                HasShadow="True">
 
-            <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout Spacing="45">
 
                 <Label Text="Crear Cuenta"
-                       FontSize="28"
+                       FontSize="26"
+                       TextTransform="Uppercase"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
-                       TextColor="#333" />
+                       TextColor="Black" />
 
                 <Label Text="Regístrate para continuar"
                        FontSize="16"
+                       TextTransform="Uppercase"
                        HorizontalOptions="Center"
                        TextColor="#666" />
 
@@ -65,7 +67,10 @@
                         TextColor="White"
                         CornerRadius="10"
                         HeightRequest="50"
+                        TextTransform="Uppercase"
                         Clicked="Registrar_Cliked"/>
+                <BoxView HeightRequest="1" Color="#ddd" />
+
 
             </VerticalStackLayout>
 

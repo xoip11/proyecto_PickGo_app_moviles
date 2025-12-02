@@ -9,7 +9,7 @@
        
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="Gray" Offset="0.0"/>
                 <GradientStop Color="Gainsboro" Offset="1.0"/>
             </LinearGradientBrush>
         </Grid.Background>
@@ -21,16 +21,17 @@
                CornerRadius="30"
                HasShadow="True">
 
-            <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout Spacing="35">
 
                 <Label Text="Bienvenido a Pick Go"
                        FontSize="28"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
-                       TextColor="#333" />
+                       TextColor="Red" 
+                       TextTransform="Uppercase"/>
 
                 <Label Text="Inicia sesión para continuar"
-                       FontSize="16"
+                       FontSize="25"
                        HorizontalOptions="Center"
                        TextColor="#666" />
 
@@ -55,21 +56,24 @@
 
               
                 <Button Text="Continuar"
-                        BackgroundColor="Green"
+                        BackgroundColor="Gray"
                         TextColor="White"
-                        CornerRadius="10"
-                        HeightRequest="50"
+                        CornerRadius="20"
+                        HeightRequest="55"
+                        TextTransform="Uppercase"
                         Clicked="Continuar_Clicked"/>
 
               
                 <Button Text="Registrarse"
-                        BackgroundColor="Transparent"
-                        TextColor="Blue"
-                        BorderColor="Black"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                       
                         BorderWidth="1"
-                        CornerRadius="10"
-                        HeightRequest="50"
+                        CornerRadius="20"
+                        HeightRequest="55"
+                        TextTransform="Uppercase"
                         Clicked="Registrarse_Clicked"/>
+                <BoxView HeightRequest="1" Color="#ddd" />
 
             </VerticalStackLayout>
 
