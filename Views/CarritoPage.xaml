@@ -7,8 +7,8 @@
 
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="Gray" Offset="0.0"/>
-                <GradientStop Color="Gainsboro" Offset="1.0"/>
+                <GradientStop Color="White"/>
+               
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -19,23 +19,24 @@
                Spacing="25">
 
                 <Label Text="Carrito de compras"
-           FontSize="28"
-           HorizontalOptions="Center"/>
+                       TextColor="Black"
+                    FontSize="30"
+                 HorizontalOptions="Center"/>
 
                 <CollectionView x:Name="ListaCarrito"
                    ItemsSource="{Binding Carrito}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Label Text="{Binding Display}" VerticalOptions="Center" />
+                                <Label Text="{Binding Display}" VerticalOptions="Center" TextColor="Black" />
                                  
                                   
                                 <Button Text="Eliminar"
-                               BackgroundColor="Red"
+                               BackgroundColor="Gray"
                                  TextTransform="Uppercase"
-                              TextColor="White"
-                               BindingContext="{Binding}"
-                               Clicked="RemoveProduct_Clicked"/>
+                                 TextColor="White"
+                                 BindingContext="{Binding}"
+                                 Clicked="RemoveProduct_Clicked"/>
                                 
                                
                             </StackLayout>
@@ -46,10 +47,14 @@
 
                 <Button Text="Agregar producto"
                  Margin="0,20,0,0"
+                 BackgroundColor="Red"
+                        TextColor="White"
                  Clicked="AddProduct_Clicked"/>
-             </VerticalStackLayout>
+                
+               
+            </VerticalStackLayout>
         </ScrollView>
-
+         
     </Grid>
 
 </ContentPage> 

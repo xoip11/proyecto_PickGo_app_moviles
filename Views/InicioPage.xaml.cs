@@ -27,6 +27,7 @@ public partial class InicioPage : ContentPage
     }
 
 
+
 }
 
 
