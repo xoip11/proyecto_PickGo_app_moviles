@@ -54,12 +54,14 @@
                                 <Button Text="Favorito"
                                         BackgroundColor="Red"
                                         TextColor="White"
-                                        StyleClass="BotonFavorito" />
+                                        StyleClass="BotonFavorito"
+                                        Clicked="AgregarFavorito_Clicked"/>
 
                                 <Button Text="Agregar"
                                         TextColor="White"
                                         BackgroundColor="Blue"
-                                        StyleClass="BotonAgregar" />
+                                        StyleClass="BotonAgregar"
+                                        Clicked="AddProduct_Clicked"/>
 
                             </HorizontalStackLayout>
 
@@ -91,6 +93,14 @@
                         TextColor="White"
                         BackgroundColor="Gray"
                         StyleClass="BotonMenu" />
+                <Button Text=" Favoritos"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        CornerRadius="20"
+                        WidthRequest="120"
+                        FontSize="18"
+                        Padding="10,5"
+                        Clicked="IrFavoritos_Clicked"/>
 
             </HorizontalStackLayout>
 

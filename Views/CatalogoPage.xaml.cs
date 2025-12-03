@@ -1,3 +1,4 @@
+using PickGo.Models;
 namespace PickGo.Views;
 
 public partial class CatalogoPage : ContentPage
@@ -18,6 +19,7 @@ public partial class CatalogoPage : ContentPage
         ListaTiendas.ItemsSource = Tiendas;
     }
 
+    
     private async void IrCarrito_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new CarritoPage());
@@ -26,5 +28,30 @@ public partial class CatalogoPage : ContentPage
     private async void IrPerfil_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new PerfilPage());
+    }
+    private async void AddProduct_Clicked(object sender, EventArgs e)
+    {
+        var boton = sender as Button;
+        var tienda = boton?.BindingContext as Models.Tienda;
+
+        if (tienda == null)
+            return;
+        CarritoGlobal.carrito.Add(tienda);
+        await DisplayAlert("Carrito", $"{tienda.Nombre} agregado al carrito", "OK");
+    }
+    private async void AgregarFavorito_Clicked(object sender, EventArgs e)
+    {
+        var boton = sender as Button;
+        var tienda = boton?.BindingContext as Models.Tienda;
+
+        if (tienda == null)
+            return;
+
+        FavoritosGlobal.Favoritos.Add(tienda);
+        await DisplayAlert("Favorito", $"{tienda.Nombre} agregado a favoritos", "OK");
+    }
+    private async void IrFavoritos_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new FavoritosPage());
     }
 }

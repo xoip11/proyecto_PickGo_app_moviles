@@ -1,36 +1,32 @@
 using System.Collections.ObjectModel;
-
+using PickGo.Models;
 namespace PickGo.Views;
 
 public partial class CarritoPage : ContentPage
 {
-     public ObservableCollection<Tienda> Carrito { get; set; }
-        public CarritoPage()
-        {
+     
+    public CarritoPage()
+    {
             InitializeComponent();
+        ListaCarrito.ItemsSource = CarritoGlobal.carrito;
 
-            Carrito = new ObservableCollection<Tienda>();
-            BindingContext = this;
-        }
 
-        private void AddProduct_Clicked(object sender, EventArgs e)
-        {
-            var random = new Random();
+    }
+    private void RemoveProduct_Clicked(object sender, EventArgs e)
+    {
+        var boton = sender as Button;
+        var tienda = boton?.BindingContext as Tienda;
 
-            Carrito.Add(new Tienda
-            {
-                Nombre = "Producto " + (Carrito.Count + 1),
-                Precio = random.Next(10, 200)
-            });
-        }
+        if (tienda == null)
+            return;
 
-        private void RemoveProduct_Clicked(object sender, EventArgs e)
-        {
-            var button = (Button) sender;
-            var product = (Tienda) button.BindingContext;
+        CarritoGlobal.carrito.Remove(tienda);
 
-            Carrito.Remove(product);
-        }
+        ListaCarrito.ItemsSource = null;
+        ListaCarrito.ItemsSource = CarritoGlobal.carrito;
+
+        DisplayAlert("Eliminado", $"{tienda.Nombre} fue eliminado de el carrito", "OK");
+    }
         
 
     }

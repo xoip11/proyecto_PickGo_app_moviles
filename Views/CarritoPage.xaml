@@ -16,10 +16,10 @@
         <ScrollView>
             <VerticalStackLayout
                Padding="30,0"
-               Spacing="25">
+               Spacing="20">
 
                 <Label Text="Carrito de compras"
-                       TextColor="Black"
+                       TextColor="White"
                     FontSize="30"
                  HorizontalOptions="Center"/>
 
@@ -27,31 +27,30 @@
                    ItemsSource="{Binding Carrito}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Label Text="{Binding Display}" VerticalOptions="Center" TextColor="Black" />
-                                 
-                                  
+                            <StackLayout Orientation="Horizontal" Spacing="15" Padding="5">
+                                <Label Text="{Binding Display}" VerticalOptions="Center" TextColor="White" />
+
+
                                 <Button Text="Eliminar"
                                BackgroundColor="Gray"
                                  TextTransform="Uppercase"
                                  TextColor="White"
                                  BindingContext="{Binding}"
                                  Clicked="RemoveProduct_Clicked"/>
-                                
-                               
+
+
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-
-                <Button Text="Agregar producto"
-                 Margin="0,20,0,0"
-                 BackgroundColor="Red"
+                <Button Text="Pagar productos"
+                        Margin="0,20,0,0"
+                        BackgroundColor="Red"
                         TextColor="White"
-                 Clicked="AddProduct_Clicked"/>
-                
-               
+                        />
+
+
             </VerticalStackLayout>
         </ScrollView>
          

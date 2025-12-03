@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PickGo.Views.FavoritosPage"
+             Title="FavoritosPage">
+    <VerticalStackLayout Padding="15" Spacing="10">
+
+        <Label Text="Mis Favoritos"
+               FontSize="26"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"/>
+
+        <CollectionView x:Name="ListaFavoritos">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Nombre}" FontSize="20" />
+
+                            <Button Text="Eliminar"
+                                    BackgroundColor="Red"
+                                    TextColor="Black"
+                                    CornerRadius="20"
+                                    Clicked="EliminarFavorito_Clicked"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
