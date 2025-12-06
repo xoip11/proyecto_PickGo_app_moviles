@@ -2,15 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.CarritoPage"
-             Title="CarritoPage">
+             Title="CarritoPage"
+             >
     <Grid>
 
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="White"/>
-               
-            </LinearGradientBrush>
-        </Grid.Background>
+       
 
        
         <ScrollView>
@@ -27,19 +23,19 @@
                    ItemsSource="{Binding Carrito}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Orientation="Horizontal" Spacing="15" Padding="5">
-                                <Label Text="{Binding Display}" VerticalOptions="Center" TextColor="White" />
+                            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding Display}" FontSize="20" />
 
-
-                                <Button Text="Eliminar"
-                               BackgroundColor="Gray"
-                                 TextTransform="Uppercase"
-                                 TextColor="White"
-                                 BindingContext="{Binding}"
-                                 Clicked="RemoveProduct_Clicked"/>
-
-
-                            </StackLayout>
+                                    <Button Text="Eliminar"
+                                            BackgroundColor="Red"
+                                            TextColor="Black"
+                                            CornerRadius="20"
+                                            BindingContext="{Binding}"
+                                            Clicked="RemoveProduct_Clicked"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

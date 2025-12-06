@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PickGo.Views.CatalogoPage"
              Title="CatalogoPage">
+   
     <Grid RowDefinitions="*,Auto">
 
         
@@ -12,13 +13,21 @@
                 <GradientStop Color="#F2F2F2" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
+        <Image x:Name="ImagenPreview"
+               HeightRequest="150"
+               WidthRequest="150"
+               Aspect="AspectFill"
+               HorizontalOptions="Center"
+               IsVisible="False"/>
 
-       
+
+
         <CollectionView x:Name="ListaTiendas"
                         Grid.Row="0"
                         ItemsLayout="VerticalGrid, 2"
                         ItemsSource="{Binding Tiendas}"
                         Margin="10">
+            
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -32,36 +41,44 @@
 
                         <VerticalStackLayout Spacing="10">
 
-                            
-                            <Image Source="boutique.png"
+
+                            <Image Source="{Binding Imagen, TargetNullValue='boutique.png'}"
                                    Aspect="AspectFill"
                                    HeightRequest="120"
                                    WidthRequest="120"
                                    HorizontalOptions="Center"
                                 />
 
-                         
-                            <Label Text="Boutique AA"
+
+                            <Label Text="{Binding Nombre}"
                                    FontSize="18"
                                    FontAttributes="Bold"
                                    HorizontalOptions="Center"
                                    TextColor="Black" />
 
-                            
-                            <HorizontalStackLayout Spacing="8" 
+
+                            <HorizontalStackLayout Spacing="2" 
                                                    HorizontalOptions="Center">
 
                                 <Button Text="Favorito"
                                         BackgroundColor="Red"
                                         TextColor="White"
                                         StyleClass="BotonFavorito"
+                                        CornerRadius="20"
                                         Clicked="AgregarFavorito_Clicked"/>
 
                                 <Button Text="Agregar"
                                         TextColor="White"
                                         BackgroundColor="Blue"
+                                        CornerRadius="20"
                                         StyleClass="BotonAgregar"
                                         Clicked="AddProduct_Clicked"/>
+                                <Button Text="Eliminar"
+                                        BackgroundColor="Gray"
+                                        CornerRadius="20"
+                                        TextColor="White"
+                                        Clicked="EliminarTienda_Clicked" />
+
 
                             </HorizontalStackLayout>
 
@@ -74,16 +91,18 @@
 
         </CollectionView>
 
-       
+
         <Grid Grid.Row="1"
               Padding="15"
               BackgroundColor="#eee">
 
-            <HorizontalStackLayout Spacing="25" 
+            <HorizontalStackLayout Spacing="10" 
                                    HorizontalOptions="Center">
+                
 
                 <Button Text="Carrito"
                         Clicked="IrCarrito_Clicked"
+                        CornerRadius="20"
                         BackgroundColor="Gray"
                         TextColor="White"
                         StyleClass="BotonMenu" />
@@ -92,15 +111,21 @@
                         Clicked="IrPerfil_Clicked"
                         TextColor="White"
                         BackgroundColor="Gray"
+                        CornerRadius="20"
                         StyleClass="BotonMenu" />
                 <Button Text=" Favoritos"
                         BackgroundColor="Gray"
                         TextColor="White"
                         CornerRadius="20"
-                        WidthRequest="120"
                         FontSize="18"
                         Padding="10,5"
                         Clicked="IrFavoritos_Clicked"/>
+                <Button Text="Agregar Tienda"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Clicked="AgregarTienda_Clicked" />
+                
 
             </HorizontalStackLayout>
 
