@@ -102,26 +102,26 @@
 
                 <Button Text="Carrito"
                         Clicked="IrCarrito_Clicked"
-                        CornerRadius="20"
-                        BackgroundColor="Gray"
+                        CornerRadius="17"
+                        BackgroundColor="Green"
                         TextColor="White"
                         StyleClass="BotonMenu" />
 
                 <Button Text="Perfil"
                         Clicked="IrPerfil_Clicked"
                         TextColor="White"
-                        BackgroundColor="Gray"
-                        CornerRadius="20"
+                        BackgroundColor="DarkBlue"
+                        CornerRadius="17"
                         StyleClass="BotonMenu" />
                 <Button Text=" Favoritos"
-                        BackgroundColor="Gray"
+                        BackgroundColor="DarkGoldenrod"
                         TextColor="White"
-                        CornerRadius="20"
+                        CornerRadius="17"
                         FontSize="18"
                         Padding="10,5"
                         Clicked="IrFavoritos_Clicked"/>
                 <Button Text="Agregar Tienda"
-                        BackgroundColor="Gray"
+                        BackgroundColor="DarkBlue"
                         TextColor="White"
                         CornerRadius="20"
                         Clicked="AgregarTienda_Clicked" />
