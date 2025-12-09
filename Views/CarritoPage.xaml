@@ -5,17 +5,23 @@
              Title="CarritoPage"
              >
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="White" />
+                <GradientStop Color="Gainsboro" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-       
 
-       
+
+
         <ScrollView>
             <VerticalStackLayout
                Padding="30,0"
                Spacing="20">
 
                 <Label Text="Carrito de compras"
-                       TextColor="White"
+                       TextColor="Black"
                     FontSize="30"
                  HorizontalOptions="Center"/>
 
@@ -29,7 +35,7 @@
 
                                     <Button Text="Eliminar"
                                             BackgroundColor="Red"
-                                            TextColor="Black"
+                                            TextColor="White"
                                             CornerRadius="20"
                                             BindingContext="{Binding}"
                                             Clicked="RemoveProduct_Clicked"/>
@@ -42,7 +48,7 @@
 
                 <Button Text="Pagar productos"
                         Margin="0,20,0,0"
-                        BackgroundColor="Red"
+                        BackgroundColor="Green"
                         TextColor="White"
                         />
 
