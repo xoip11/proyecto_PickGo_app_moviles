@@ -12,9 +12,9 @@ public partial class CatalogoPage : ContentPage
         Tiendas = new ObservableCollection<Models.Tienda>
         {
             new Models.Tienda { Nombre = "Boutique AA", Imagen = "boutique.png" },
-            new Models.Tienda { Nombre = "ElectroShop", Imagen = "boutique.png" },
-            new Models.Tienda { Nombre = "Zapatería Luna", Imagen = "" },
-            new Models.Tienda { Nombre = "Farmacia Centro", Imagen = "" }
+            new Models.Tienda { Nombre = "ElectroShop", Imagen = "electronica.png" },
+            new Models.Tienda { Nombre = "cloth store", Imagen = "cloth.png" },
+            new Models.Tienda { Nombre = "grocery store", Imagen = "super.png" }
         };
 
         BindingContext = this;
@@ -36,10 +36,28 @@ public partial class CatalogoPage : ContentPage
         var tienda = boton?.BindingContext as Models.Tienda;
 
         if (tienda == null)
+        {
             return;
+        }
         CarritoGlobal.carrito.Add(tienda);
+
+        // GUARDAR EN BD
+        ConexionBD db = new ConexionBD();
+        var parametros = new Dictionary<string, object>
+        {
+            { "@tel", LoginGlobal.Telefono },
+            { "@nom", tienda.Nombre }
+        };
+
+        await db.Ejecutar(
+            "INSERT INTO Carrito (telefono, nombreTienda) VALUES (@tel, @nom)",
+            parametros
+        );
+
         await DisplayAlert("Carrito", $"{tienda.Nombre} agregado al carrito", "OK");
+
     }
+    // Agregar a Favoritos
     private async void AgregarFavorito_Clicked(object sender, EventArgs e)
     {
         var boton = sender as Button;
@@ -49,6 +67,20 @@ public partial class CatalogoPage : ContentPage
             return;
 
         FavoritosGlobal.Favoritos.Add(tienda);
+
+        // GUARDAR EN BD
+        ConexionBD db = new ConexionBD();
+        var parametros = new Dictionary<string, object>
+        {
+            { "@tel", LoginGlobal.Telefono },
+            { "@nom", tienda.Nombre }
+        };
+
+        await db.Ejecutar(
+            "INSERT INTO Favoritos (telefono, nombreTienda) VALUES (@tel, @nom)",
+            parametros
+        );
+
         await DisplayAlert("Favorito", $"{tienda.Nombre} agregado a favoritos", "OK");
     }
     private async void IrFavoritos_Clicked(object sender, EventArgs e)
@@ -83,10 +115,10 @@ public partial class CatalogoPage : ContentPage
         }
         catch
         {
-            // Si falla el picker, simplemente ignoramos y dejamos rutaImagen = null
+            // Si no se inserta alguna imagem se queda en null
         }
 
-        // 2. Preguntar al usuario si quiere agregar la tienda
+       
         bool agregar = await DisplayAlert("Confirmar", "¿Deseas agregar esta tienda?", "Sí", "No");
         if (!agregar)
         {
@@ -98,7 +130,7 @@ public partial class CatalogoPage : ContentPage
 
         if (rutaImagen != null)
         {
-            // 3. Copiar imagen al almacenamiento local
+            //  Copia la imagen al almacenamiento local
             var fileName = Path.GetFileName(rutaImagen);
             newFile = Path.Combine(FileSystem.AppDataDirectory, fileName);
             using var stream = File.OpenRead(rutaImagen);
@@ -106,12 +138,25 @@ public partial class CatalogoPage : ContentPage
             await stream.CopyToAsync(newStream);
         }
 
-        // 4. Agregar la tienda a la colección
+        //  Agrega la tienda a la colección
         Tiendas.Add(new Models.Tienda
         {
             Nombre = nombre,
-            Imagen = newFile // puede ser null si no eligió imagen
+            Imagen = newFile
         });
+
+        // GUARDA EN Base De Datos
+        ConexionBD db = new ConexionBD();
+        var parametros = new Dictionary<string, object>
+        {
+            { "@nom", nombre },
+            { "@img", newFile }
+        };
+
+        await db.Ejecutar(
+            "INSERT INTO Tiendas (nombre, imagen) VALUES (@nom, @img)",
+            parametros
+        );
 
         ImagenPreview.IsVisible = false;
     }
@@ -133,6 +178,19 @@ public partial class CatalogoPage : ContentPage
         if (confirmar)
         {
             Tiendas.Remove(tienda);
+
+            // ELIMINAR DE BD
+            ConexionBD db = new ConexionBD();
+            var parametros = new Dictionary<string, object>
+            {
+                { "@nom", tienda.Nombre }
+            };
+
+            await db.Ejecutar(
+                "DELETE FROM Tiendas WHERE nombre=@nom",
+                parametros
+            );
+
             await DisplayAlert("Eliminado", $"{tienda.Nombre} fue eliminada", "OK");
         }
     }

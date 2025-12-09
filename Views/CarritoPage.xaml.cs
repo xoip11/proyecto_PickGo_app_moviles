@@ -12,7 +12,7 @@ public partial class CarritoPage : ContentPage
 
 
     }
-    private void RemoveProduct_Clicked(object sender, EventArgs e)
+    private async void RemoveProduct_Clicked(object sender, EventArgs e)
     {
         var boton = sender as Button;
         var tienda = boton?.BindingContext as Tienda;
@@ -20,13 +20,24 @@ public partial class CarritoPage : ContentPage
         if (tienda == null)
             return;
 
+        var parametros = new Dictionary<string, object>
+    {
+        { "@tel", LoginGlobal.Telefono },
+        { "@nom", tienda.Nombre }
+    };
+
+        ConexionBD conexion = new ConexionBD();
+
+        await conexion.Ejecutar(
+            "DELETE FROM Carrito WHERE telefono=@tel AND nombreTienda=@nom",
+            parametros
+        );
+
         CarritoGlobal.carrito.Remove(tienda);
 
         ListaCarrito.ItemsSource = null;
         ListaCarrito.ItemsSource = CarritoGlobal.carrito;
 
-        DisplayAlert("Eliminado", $"{tienda.Nombre} fue eliminado de el carrito", "OK");
+        await DisplayAlert("Eliminado", $"{tienda.Nombre} fue eliminado del carrito", "OK");
     }
-        
-
-    }
+}
