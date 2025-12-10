@@ -8,21 +8,15 @@ namespace PickGo.Models
 {
     public class Tienda
     {
+        public int Id { get; set; }
         public string Nombre { get; set; }
-
-        public string Imagen { get; set; }
-
-        public double Precio { get; set; }
-
-        public string Display => $"{Nombre}: ${Precio}";
-
-
-
-
+        public string Imagen { get; set; } 
+        public string Display => $"{Nombre}";
     }
 
 
-    
+
+
 }
 
 

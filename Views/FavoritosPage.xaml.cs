@@ -1,42 +1,65 @@
 using PickGo.Models;
 namespace PickGo.Views;
+
+using PickGo.Services;
 using System.Collections.Generic;
+
 public partial class FavoritosPage : ContentPage
 {
-	public FavoritosPage()
-	{
-		InitializeComponent();
+    public FavoritosPage()
+    {
+        InitializeComponent();
         ListaFavoritos.ItemsSource = FavoritosGlobal.Favoritos;
     }
-	private async void EliminarFavorito_Clicked(object sender, EventArgs e)
+
+    private async void EliminarFavorito_Clicked(object sender, EventArgs e)
     {
         var boton = sender as Button;
-        var tienda = boton?.BindingContext as Tienda;
+        if (boton == null) return;
 
-        if (tienda == null)
-            return;
+        
+        object ctx = boton.BindingContext;
+        PickGo.Models.Tienda tiendaModelo = null;
 
-        // 1. Eliminar de la base de datos
-        ConexionBD conexion = new ConexionBD();
-        var parametros = new Dictionary<string, object>
+        if (ctx is PickGo.Models.Tienda m)
         {
-            { "@tel", LoginGlobal.Telefono },
-            { "@nom", tienda.Nombre }
-        };
+            tiendaModelo = m;
+        }
+        else if (ctx is PickGo.Services.Tienda s)
+        {
+            
+            tiendaModelo = new PickGo.Models.Tienda
+            {
+                Nombre = s.Nombre,
+                Imagen = s.Imagen
+            };
+        }
+        else
+        {
+           
+            return;
+        }
 
-        await conexion.Ejecutar(
-            "DELETE FROM Favoritos WHERE telefono=@tel AND nombreTienda=@nom",
-            parametros
-        );
+        // Llamada a la API para eliminar
+        var api = new ApiService();
+        bool ok = await api.DeleteFavorito(LoginGlobal.Telefono, tiendaModelo.Nombre);
+        if (!ok)
+        {
+            await DisplayAlert("Error", "No se pudo eliminar favorito en el servidor", "OK");
+            return;
+        }
 
-        // 2. Eliminar de la lista local
-        FavoritosGlobal.Favoritos.Remove(tienda);
+        // Eliminar del listado global
+        var itemToRemove = FavoritosGlobal.Favoritos.FirstOrDefault(x => x.Nombre == tiendaModelo.Nombre);
+        if (itemToRemove != null)
+        {
+            FavoritosGlobal.Favoritos.Remove(itemToRemove);
+        }
 
-        // 3. Actualizar lista en pantalla
+        // Refrescar vista
         ListaFavoritos.ItemsSource = null;
         ListaFavoritos.ItemsSource = FavoritosGlobal.Favoritos;
 
-        // 4. Aviso
-        await DisplayAlert("Eliminado", $"{tienda.Nombre} fue quitado de favoritos", "OK");
+        await DisplayAlert("Eliminado", $"{tiendaModelo.Nombre} fue quitado de favoritos", "OK");
     }
 }

@@ -1,10 +1,11 @@
 using PickGo.Models;
-
+using PickGo.Services;
 namespace PickGo.Views;
-
+using PickGo.Services;
 public partial class InicioPage : ContentPage
 {
-    ConexionBD conexion = new ConexionBD();
+    ApiService api = new ApiService();
+
     public InicioPage()
 	{
 		InitializeComponent();
@@ -13,34 +14,26 @@ public partial class InicioPage : ContentPage
     {
         if (string.IsNullOrEmpty(txtTelefono.Text) || string.IsNullOrEmpty(txtPassword.Text))
         {
-            await DisplayAlert("Error", "Llenar todos los campos", "OK");
+            await DisplayAlert("Error", "Llene todos los campos", "OK");
             return;
         }
-
-        // Buscar usuario en la BD
-        var user = await conexion.ObtenerUsuarioPorTelefono(txtTelefono.Text);
-
-        if (user == null)
+        var api = new ApiService();
+        var result = await api.Login(txtTelefono.Text, txtPassword.Text);
+        if (result == null)
         {
-            await DisplayAlert("Error", "Teléfono incorrecto", "OK");
-            return;
-        }
-
-        // Validar contraseña
-        if (user["contrasena"].ToString() != txtPassword.Text)
-        {
-            await DisplayAlert("Error", "Contraseña incorrecta", "OK");
+            await DisplayAlert("Error", "Teléfono o contraseña incorrectos", "OK");
             return;
         }
 
         // Guardar datos globales
-        LoginGlobal.Telefono = user["telefono"].ToString();
-        LoginGlobal.Nombre = user["nombre"].ToString();
-        LoginGlobal.Password = user["contrasena"].ToString();
+        LoginGlobal.Telefono = result.Telefono;
+        LoginGlobal.Nombre = result.Nombre;
+        LoginGlobal.Password = txtPassword.Text;
 
         // Ir al catálogo
         await Navigation.PushAsync(new CatalogoPage());
     }
+
 
     private async void Registrarse_Clicked(object sender, EventArgs e)
     {

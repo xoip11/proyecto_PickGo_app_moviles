@@ -1,4 +1,5 @@
 using PickGo.Models;
+using PickGo.Services;
 using System.Collections.ObjectModel;
 namespace PickGo.Views;
 
@@ -34,52 +35,41 @@ public partial class CatalogoPage : ContentPage
     {
         var boton = sender as Button;
         var tienda = boton?.BindingContext as Models.Tienda;
+        if (tienda == null) return;
 
-        if (tienda == null)
-        {
-            return;
-        }
+        // Agrego localmente
         CarritoGlobal.carrito.Add(tienda);
 
-        // GUARDAR EN BD
-        ConexionBD db = new ConexionBD();
-        var parametros = new Dictionary<string, object>
-        {
-            { "@tel", LoginGlobal.Telefono },
-            { "@nom", tienda.Nombre }
-        };
+        // Guardar en BD via API
+        var api = new ApiService();
+        bool ok = await api.AddCarrito(LoginGlobal.Telefono, tienda.Nombre);
 
-        await db.Ejecutar(
-            "INSERT INTO Carrito (telefono, nombreTienda) VALUES (@tel, @nom)",
-            parametros
-        );
+        if (!ok)
+        {
+            await DisplayAlert("Error", "No se pudo guardar el carrito en el servidor", "OK");
+            return;
+        }
 
         await DisplayAlert("Carrito", $"{tienda.Nombre} agregado al carrito", "OK");
-
     }
+
     // Agregar a Favoritos
     private async void AgregarFavorito_Clicked(object sender, EventArgs e)
     {
         var boton = sender as Button;
         var tienda = boton?.BindingContext as Models.Tienda;
-
-        if (tienda == null)
-            return;
+        if (tienda == null) return;
 
         FavoritosGlobal.Favoritos.Add(tienda);
 
-        // GUARDAR EN BD
-        ConexionBD db = new ConexionBD();
-        var parametros = new Dictionary<string, object>
-        {
-            { "@tel", LoginGlobal.Telefono },
-            { "@nom", tienda.Nombre }
-        };
+        var api = new ApiService();
+        bool ok = await api.AddFavorito(LoginGlobal.Telefono, tienda.Nombre);
 
-        await db.Ejecutar(
-            "INSERT INTO Favoritos (telefono, nombreTienda) VALUES (@tel, @nom)",
-            parametros
-        );
+        if (!ok)
+        {
+            await DisplayAlert("Error", "No se pudo guardar en favoritos en el servidor", "OK");
+            return;
+        }
 
         await DisplayAlert("Favorito", $"{tienda.Nombre} agregado a favoritos", "OK");
     }
@@ -90,11 +80,9 @@ public partial class CatalogoPage : ContentPage
     private async void AgregarTienda_Clicked(object sender, EventArgs e)
     {
         string nombre = await DisplayPromptAsync("Nueva tienda", "Nombre de la tienda:");
-        if (string.IsNullOrWhiteSpace(nombre))
-            return;
+        if (string.IsNullOrWhiteSpace(nombre)) return;
 
         string rutaImagen = null;
-
         try
         {
             var file = await FilePicker.PickAsync(new PickOptions
@@ -105,20 +93,16 @@ public partial class CatalogoPage : ContentPage
 
             if (file != null)
             {
-                // Guardar ruta temporal
                 rutaImagen = file.FullPath;
-
-                // Mostrar previsualización
                 ImagenPreview.Source = ImageSource.FromFile(rutaImagen);
                 ImagenPreview.IsVisible = true;
             }
         }
         catch
         {
-            // Si no se inserta alguna imagem se queda en null
+            // ignore
         }
 
-       
         bool agregar = await DisplayAlert("Confirmar", "¿Deseas agregar esta tienda?", "Sí", "No");
         if (!agregar)
         {
@@ -126,37 +110,22 @@ public partial class CatalogoPage : ContentPage
             return;
         }
 
-        string newFile = null;
+        var api = new ApiService();
+        var (ok, imageUrl) = await api.UploadTiendaWithImage(nombre, rutaImagen);
 
-        if (rutaImagen != null)
+        if (!ok)
         {
-            //  Copia la imagen al almacenamiento local
-            var fileName = Path.GetFileName(rutaImagen);
-            newFile = Path.Combine(FileSystem.AppDataDirectory, fileName);
-            using var stream = File.OpenRead(rutaImagen);
-            using var newStream = File.OpenWrite(newFile);
-            await stream.CopyToAsync(newStream);
+            await DisplayAlert("Error", "No se pudo crear la tienda en el servidor", "OK");
+            ImagenPreview.IsVisible = false;
+            return;
         }
 
-        //  Agrega la tienda a la colección
+        // Agrega localmente con la URL 
         Tiendas.Add(new Models.Tienda
         {
             Nombre = nombre,
-            Imagen = newFile
+            Imagen = imageUrl
         });
-
-        // GUARDA EN Base De Datos
-        ConexionBD db = new ConexionBD();
-        var parametros = new Dictionary<string, object>
-        {
-            { "@nom", nombre },
-            { "@img", newFile }
-        };
-
-        await db.Ejecutar(
-            "INSERT INTO Tiendas (nombre, imagen) VALUES (@nom, @img)",
-            parametros
-        );
 
         ImagenPreview.IsVisible = false;
     }
