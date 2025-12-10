@@ -41,4 +41,8 @@ public partial class CarritoPage : ContentPage
 
         await DisplayAlert("Eliminado", $"{tienda.Nombre} fue eliminado del carrito", "OK");
     }
+    private void pagarproduct_clicked(object sender, EventArgs e)
+    {
+        lblMensajePago.Text = "En trabajo el proceso de pago...";
+    }
 }

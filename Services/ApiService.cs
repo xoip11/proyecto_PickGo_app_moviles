@@ -96,7 +96,6 @@ namespace PickGo.Services
             var res = await _client.PostAsJsonAsync("/tiendas", payload);
             return res.IsSuccessStatusCode;
         }
-
         // FAVORITOS
         public async Task<bool> AddFavorito(string telefono, string nombreTienda)
         {
@@ -150,6 +149,7 @@ namespace PickGo.Services
             var res = await _client.SendAsync(req);
             return res.IsSuccessStatusCode;
         }
+
     }
 
     // MODELOS AUXILIARES

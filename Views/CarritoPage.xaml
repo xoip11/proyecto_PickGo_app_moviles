@@ -50,12 +50,21 @@
                         Margin="0,20,0,0"
                         BackgroundColor="Green"
                         TextColor="White"
+                        Clicked="pagarproduct_clicked"
                         />
+                <Label
+                    x:Name="lblMensajePago"
+                    Text=""
+                    TextColor="Black"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
 
 
             </VerticalStackLayout>
         </ScrollView>
          
     </Grid>
+    
 
 </ContentPage> 
