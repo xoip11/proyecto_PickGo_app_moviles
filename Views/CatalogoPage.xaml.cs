@@ -13,9 +13,9 @@ public partial class CatalogoPage : ContentPage
         Tiendas = new ObservableCollection<Models.Tienda>
         {
             new Models.Tienda { Nombre = "Boutique AA", Imagen = "boutique.png" },
-            new Models.Tienda { Nombre = "ElectroShop", Imagen = "electronica.png" },
-            new Models.Tienda { Nombre = "cloth store", Imagen = "cloth.png" },
-            new Models.Tienda { Nombre = "grocery store", Imagen = "super.png" }
+            new Models.Tienda { Nombre = "Electric Shop", Imagen = "electro.jpeg" },
+            new Models.Tienda { Nombre = "clothing store", Imagen = "clos.jpeg" },
+            new Models.Tienda { Nombre = "kids store", Imagen = "kids.jpeg" }
         };
 
         BindingContext = this;
